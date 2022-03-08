@@ -4,6 +4,7 @@ import Pages from "vite-plugin-pages";
 import HtmlConfig from "vite-plugin-html-config";
 import { ViteWebfontDownload } from "vite-plugin-webfont-dl";
 import Layouts from "vite-plugin-vue-layouts";
+import { VitePWA } from "vite-plugin-pwa";
 
 // https://vitejs.dev/config/
 
@@ -26,6 +27,8 @@ export default ({ mode }) => {
       // Layouts like nuxt
       // Reference - https://github.com/JohnCampionJr/vite-plugin-vue-layouts
       Layouts(),
+      // https://vite-plugin-pwa.netlify.app/guide/
+      VitePWA(),
     ],
   });
 

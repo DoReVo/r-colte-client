@@ -33,6 +33,7 @@
     "vite": "^2.8.0",
     "vite-plugin-html-config": "^1.0.8",
     "vite-plugin-pages": "^0.21.3",
+    "vite-plugin-pwa": "^0.11.13",
     "vite-plugin-vue-layouts": "^0.6.0",
     "vite-plugin-webfont-dl": "^1.0.9",
     "vue-tsc": "^0.29.8"
