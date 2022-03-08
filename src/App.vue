@@ -13,7 +13,6 @@ export default defineComponent({
 <style lang="postcss">
 #app {
   @apply bg-sky-50;
-  @apply w-screen max-h-full min-h-screen;
-  @apply flex justify-center;
+  @apply max-h-full min-h-screen w-screen;
 }
 </style>
