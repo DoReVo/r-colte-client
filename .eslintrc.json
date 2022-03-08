@@ -17,5 +17,7 @@
         "vue",
         "@typescript-eslint"
     ],
-    "rules": {}
+    "rules": {
+        "prettier/prettier": "error"
+    }
 }
