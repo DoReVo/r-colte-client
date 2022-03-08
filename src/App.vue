@@ -1,8 +1,14 @@
 <script lang="ts">
+import { mapState } from "pinia";
 import { defineComponent } from "vue";
+import AppStore from "./store/AppStore";
 
 export default defineComponent({
   name: "App",
+  computed: {
+    ...mapState(AppStore, ["user"]),
+  },
+  created() {},
 });
 </script>
 
