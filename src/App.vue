@@ -9,3 +9,11 @@ export default defineComponent({
 <template>
   <router-view />
 </template>
+
+<style lang="postcss">
+#app {
+  @apply bg-sky-50;
+  @apply w-screen max-h-full min-h-screen;
+  @apply flex justify-center;
+}
+</style>

@@ -4,6 +4,7 @@ import { createPinia } from "pinia";
 import App from "./App.vue";
 import { setupLayouts } from "virtual:generated-layouts";
 import VirtualPages from "~pages";
+import "./main.css";
 
 const RoutesWithLayouts = setupLayouts(VirtualPages);
 
