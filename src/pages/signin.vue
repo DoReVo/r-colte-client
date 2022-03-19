@@ -40,7 +40,7 @@ export default defineComponent({
 
 <template>
   <div
-    class="container mx-auto flex max-h-full min-h-screen w-full items-center justp-4 ify-center pt-32"
+    class="container mx-auto flex max-h-full min-h-screen w-full items-center justify-center pt-32"
   >
     <div
       class="flex w-64 flex-col items-center justify-center rounded-md bg-white py-7 px-4 shadow"
