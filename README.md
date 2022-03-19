@@ -20,3 +20,27 @@
 - Sign in
 - Credits page (For any free resource used)
 - PWA `new content` notification
+
+
+# FAQ
+
+## Uninstalling PrimeVue
+
+1. Run `npm remove primevue`
+2. Run `npm remove primeicons`
+3. Delete the following in src/main.ts
+
+```javascript
+// Prime vue css and theme
+// Change the first import to change theme
+import "primevue/resources/themes/saga-blue/theme.css";
+import "primevue/resources/primevue.min.css";
+import "primeicons/primeicons.css";
+```
+```javascript
+app.use(PrimeVue);
+```
+
+```javascript
+import PrimeVue from "primevue/config";
+```
