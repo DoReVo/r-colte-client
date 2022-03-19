@@ -15,13 +15,12 @@
 - Sass
 - [Eslint](https://eslint.org/) (typescript, airbnb, vue, import, prettier plugin installed)
 
-
 # Pages included
 - Sign in
 - Credits page (For any free resource used)
-- PWA `new content` notification
 
-
+# Extra
+- Captured browser `beforeinstallprompt` and `appinstalled` event to provide custom pwa install prompt
 # FAQ
 
 ## Uninstalling PrimeVue
