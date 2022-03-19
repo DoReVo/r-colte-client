@@ -2,7 +2,9 @@ import { createApp } from "vue";
 import { createRouter, createWebHistory } from "vue-router";
 import { createPinia } from "pinia";
 import App from "./App.vue";
+// eslint-disable-next-line import/no-unresolved
 import { setupLayouts } from "virtual:generated-layouts";
+// eslint-disable-next-line import/no-unresolved
 import VirtualPages from "~pages";
 import PrimeVue from "primevue/config";
 
