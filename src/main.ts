@@ -7,10 +7,10 @@ import { setupLayouts } from "virtual:generated-layouts";
 // eslint-disable-next-line import/no-unresolved
 import VirtualPages from "~pages";
 import PrimeVue from "primevue/config";
+import { MotionPlugin } from "@vueuse/motion";
 
 // Tailwind stuff inside here
 import "./main.css";
-
 const RoutesWithLayouts = setupLayouts(VirtualPages);
 
 const router = createRouter({
@@ -22,6 +22,7 @@ const app = createApp(App);
 
 app.use(router);
 app.use(createPinia());
+app.use(MotionPlugin);
 
 // Prime vue css and theme
 // Change the first import to change theme

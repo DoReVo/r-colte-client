@@ -2,7 +2,7 @@
 import { mapState } from "pinia";
 import { defineComponent } from "vue";
 import AppStore from "./store/AppStore";
-import type { BeforeInstallPromptEvent } from "./types/PWA.";
+import type { BeforeInstallPromptEvent } from "./types/PWA";
 
 interface Data {
   pwaPromptEvent: null | BeforeInstallPromptEvent;
@@ -37,7 +37,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <router-view />
+  <router-view style="-webkit-tap-highlight-color: transparent" />
 </template>
 
 <style lang="scss">
