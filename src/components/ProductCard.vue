@@ -15,14 +15,14 @@
 
       <button
         v-if="shouldRenderImgNavigationButton('next')"
-        class="no-tap-effect absolute top-20 right-0 mr-2 border-none outline-offset-1 duration-75 focus:outline-primary active:translate-y-1"
+        class="no-tap-effect absolute top-20 right-0 mr-2 border-none outline-offset-1 duration-75 focus:outline-primary active:translate-y-0.5"
         @click="switchImage('next')"
       >
         <NextIcon class="h-4 w-4 text-primary" />
       </button>
       <button
         v-if="shouldRenderImgNavigationButton('prev')"
-        class="no-tap-effect absolute top-20 left-0 ml-2 border-none outline-offset-1 duration-75 focus:outline-primary active:translate-y-1"
+        class="no-tap-effect absolute top-20 left-0 ml-2 border-none outline-offset-1 duration-75 focus:outline-primary active:translate-y-0.5"
         @click="switchImage('prev')"
       >
         <PrevIcon class="h-4 w-4 text-primary" />
