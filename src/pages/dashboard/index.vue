@@ -1,6 +1,6 @@
 <template>
   <div
-    class="grid grid-cols-1 items-center justify-items-center gap-y-14 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+    class="mt-5 grid grid-cols-1 items-center justify-items-center gap-y-14 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
   >
     <ProductCard
       v-for="(product, index) in products"

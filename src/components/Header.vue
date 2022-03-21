@@ -1,33 +1,34 @@
 <template>
   <div
-    class="header bg-primary2 relative flex h-[75px] items-end justify-center"
+    class="header bg-primary2 relative mb-5 flex h-[50px] items-end justify-center"
   >
-    <div class="text-3xl font-bold text-white">
+    <button @click="toggleSidebar(true)">Sidebar</button>
+    <div class="text-2xl font-bold text-white">
       {{ APP_NAME }}
     </div>
   </div>
+  <Sidebar
+    :is-open="isOpenSidebar"
+    @updateIsOpen="toggleSidebar(false)"
+  ></Sidebar>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import AppStore from "@/store/AppStore";
-import { defineComponent } from "vue";
+import { ref } from "vue";
+import Sidebar from "./Sidebar.vue";
 
-export default defineComponent({
-  name: "HeaderBar",
-  setup() {
-    const appStore = AppStore();
+const isOpenSidebar = ref(false);
 
-    return { APP_NAME: appStore.APP_NAME, USER_NAME: appStore.user.name };
-  },
-});
+const { APP_NAME } = AppStore();
+
+function toggleSidebar(value = true) {
+  isOpenSidebar.value = value;
+}
 </script>
 
 <style scoped lang="scss">
 .header {
-  background: radial-gradient(
-    circle,
-    rgba(86, 11, 173, 1) 0%,
-    rgba(114, 9, 183, 1) 100%
-  );
+  background-color: #4361ee;
 }
 </style>

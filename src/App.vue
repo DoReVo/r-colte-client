@@ -37,7 +37,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <router-view style="-webkit-tap-highlight-color: transparent" />
+  <router-view />
 </template>
 
 <style lang="scss">

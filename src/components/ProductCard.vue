@@ -15,18 +15,16 @@
 
       <button
         v-if="shouldRenderImgNavigationButton('next')"
-        class="absolute top-20 right-0 mr-2 rounded-full border-2 border-primary-darker outline-offset-4 duration-150 focus:outline-primary active:translate-y-0.5"
+        class="no-tap-effect absolute top-20 right-0 mr-2 rounded-full border-2 border-primary-darker outline-offset-4 duration-150 focus:outline-primary active:translate-y-0.5"
         @click="switchImage('next')"
-        style="-webkit-tap-highlight-color: transparent"
         v-motion-fade
       >
         <NextIcon class="h-4 w-4 text-primary-darker" />
       </button>
       <button
         v-if="shouldRenderImgNavigationButton('prev')"
-        class="absolute top-20 left-0 ml-2 rounded-full border-2 border-primary-darker outline-offset-4 duration-150 focus:outline-primary active:translate-y-0.5"
+        class="no-tap-effect absolute top-20 left-0 ml-2 rounded-full border-2 border-primary-darker outline-offset-4 duration-150 focus:outline-primary active:translate-y-0.5"
         @click="switchImage('prev')"
-        style="-webkit-tap-highlight-color: transparent"
         v-motion-fade
       >
         <PrevIcon class="h-4 w-4 text-primary-darker" />
@@ -51,8 +49,7 @@
     <!-- Action bar -->
     <div class="absolute -bottom-10 flex w-full flex-row-reverse px-2">
       <button
-        class="rounded-full border-2 border-primary p-0.5 text-primary outline-offset-4 duration-150 focus:outline-primary active:translate-y-0.5 mouse:hover:bg-primary mouse:hover:text-white touch:active:bg-primary touch:active:text-white"
-        style="-webkit-tap-highlight-color: transparent"
+        class="no-tap-effect rounded-full border-2 border-primary p-0.5 text-primary outline-offset-4 duration-150 focus:outline-primary active:translate-y-0.5 mouse:hover:bg-primary mouse:hover:text-white touch:active:bg-primary touch:active:text-white"
       >
         <a :href="product.productUrl" rel="noopener noreferrer" target="_blank">
           <ExternalLinkIcon
