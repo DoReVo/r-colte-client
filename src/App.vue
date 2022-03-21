@@ -42,7 +42,7 @@ export default defineComponent({
 
 <style lang="scss">
 #app {
-  @apply bg-sky-50;
+  @apply bg-sky-100;
   @apply max-h-full min-h-screen w-screen;
 }
 </style>

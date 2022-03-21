@@ -10,7 +10,8 @@ module.exports = {
       },
       colors: {
         primary: {
-          DEFAULT: "#560BAD",
+          DEFAULT: "#4895EF",
+          darker: "#4361EE",
         },
       },
       screens: {

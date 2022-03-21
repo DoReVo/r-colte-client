@@ -1,6 +1,6 @@
 <template>
   <div
-    class="grid grid-cols-1 items-center justify-items-center gap-y-5 sm:grid-cols-2"
+    class="grid grid-cols-1 items-center justify-items-center gap-y-14 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
   >
     <ProductCard
       v-for="(product, index) in products"
@@ -24,6 +24,7 @@ export default defineComponent({
   computed: {
     ...mapState(AppStore, ["products"]),
   },
+  methods: {},
   components: { ProductCard },
 });
 </script>

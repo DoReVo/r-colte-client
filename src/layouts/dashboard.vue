@@ -1,15 +1,9 @@
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
 import Header from "../components/Header.vue";
-
-export default defineComponent({
-  name: "DashboardTemplate",
-  components: { Header },
-});
 </script>
 
 <template>
-  <Header />
+  <Header class="mb-3" />
   <router-view v-motion-fade />
 </template>
 
