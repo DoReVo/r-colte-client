@@ -15,6 +15,7 @@ module.exports = {
         },
       },
       screens: {
+        xs: "320px",
         mouse: { raw: "(hover: hover)" },
         touch: { raw: "(hover: none)" },
       },

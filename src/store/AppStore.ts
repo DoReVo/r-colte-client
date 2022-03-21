@@ -14,7 +14,7 @@ interface User {
 
 const AppStore = defineStore("App", {
   state: (): AppState => ({
-    APP_NAME: "Récolte",
+    APP_NAME: "Recolte",
     user: { email: "myemail@email.com", name: "DoReVo" },
     products: [
       {
