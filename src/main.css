@@ -6,4 +6,11 @@
   .no-tap-effect {
     -webkit-tap-highlight-color: transparent;
   }
+
+  .base-dialog {
+    @apply fixed inset-0 h-screen;
+  }
+  .base-dialog-overlay {
+    @apply fixed inset-0 bg-black bg-opacity-20;
+  }
 }

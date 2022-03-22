@@ -1,15 +1,6 @@
 <template>
-  <div
-    class="actionbar fixed right-0 bottom-0 flex h-14 w-full items-center justify-around rounded-t-xl border-none bg-primary-darker drop-shadow"
-  >
-    <button
-      class="h-max w-max rounded-full border-none text-white outline-none"
-      @click="toggleModal(true)"
-    >
-      <PlusIcon class="h-8 w-8 rounded-full border-none" />
-    </button>
-  </div>
-  <Modal :is-open="isOpenModal" @change="toggleModal">
+  <Dialog :open="props.isOpen" @close="toggleDialog(false)" class="base-dialog">
+    <DialogOverlay class="base-dialog-overlay" />
     <div
       v-motion="'formMotion'"
       :initial="{
@@ -31,35 +22,45 @@
       }"
       class="fixed bottom-0 z-10 h-[95%] w-full rounded-t-xl bg-white drop-shadow-xl"
     >
-      <slot>
-        <EntryForm @close="toggleModal(false)" />
-      </slot>
+      <slot> </slot>
     </div>
-  </Modal>
+  </Dialog>
 </template>
 
 <script setup lang="ts">
-import PlusIcon from "../icons/PlusIcon.vue";
-import Modal from "./Modal.vue";
+import { Dialog, DialogOverlay } from "@headlessui/vue";
 
 import { ref } from "vue";
 import { useMotions } from "@vueuse/motion";
 import { useWindowSize } from "@vueuse/core";
-import EntryForm from "./EntryForm.vue";
+
+interface Props {
+  isOpen: boolean;
+}
+
+interface Emits {
+  (event: "change", value: boolean): void;
+}
+
+const props = withDefaults(defineProps<Props>(), { isOpen: false });
 
 const { height } = useWindowSize();
 
-const isOpenModal = ref(false);
 // For transform to 95% of screen
 const barHeight = ref<number>((95 / 100) * height.value);
+
 const motions = useMotions();
 
-const toggleModal = (value: boolean) => {
-  if (isOpenModal.value === true && value === false)
-    motions.formMotion.leave(() => {
-      isOpenModal.value = value;
-    });
-  else isOpenModal.value = value;
+const emit = defineEmits<Emits>();
+
+const closeSheet = () => {
+  motions.formMotion.leave(() => {
+    emit("change", false);
+  });
+};
+
+const toggleDialog = (value: boolean) => {
+  if (props.isOpen === true && value === false) closeSheet();
 };
 </script>
 

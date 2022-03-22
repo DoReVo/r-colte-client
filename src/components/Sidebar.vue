@@ -1,5 +1,8 @@
 <template>
-  <Modal :is-open="props.isOpen" @change="toggleModal">
+  <Dialog :open="props.isOpen" @close="toggleModal(false)" class="base-dialog">
+    <DialogOverlay
+      class="fixed inset-0 bg-black bg-opacity-20 transition duration-150"
+    />
     <!-- Content of modal -->
     <div
       v-motion="'sidebarMotion'"
@@ -20,7 +23,6 @@
           duration: 550,
         },
       }"
-      ref="sidebarRef"
       class="fixed z-10 flex h-full w-4/5 min-w-[250px] flex-col gap-y-2 bg-white px-10 pt-36 pb-20 drop-shadow-xl xs:w-[300px]"
     >
       <h3
@@ -45,15 +47,14 @@
         <span class="inline font-bree-serif tracking-wider">Logout</span>
       </button>
     </div>
-  </Modal>
+  </Dialog>
 </template>
 
 <script setup lang="ts">
+import { Dialog, DialogOverlay } from "@headlessui/vue";
 import { useMotions } from "@vueuse/motion";
-import { ref } from "vue";
 import { RouterLink } from "vue-router";
 import LogoutIcon from "../icons/LogoutIcon.vue";
-import Modal from "./Modal.vue";
 
 interface Props {
   isOpen: boolean;
@@ -66,7 +67,6 @@ const props = withDefaults(defineProps<Props>(), {
 const emit = defineEmits<{ (event: "change", value: boolean): void }>();
 
 const motions = useMotions();
-const sidebarRef = ref();
 
 const routes = [
   { name: "Home", url: "/" },
@@ -75,10 +75,11 @@ const routes = [
   { name: "Credits", url: "/credit" },
 ];
 
-const toggleModal = async (state: boolean) => {
-  motions.sidebarMotion.leave(() => {
-    emit("change", state);
-  });
+const toggleModal = async (value: boolean) => {
+  if (props.isOpen === true && value === false)
+    motions.sidebarMotion.leave(() => {
+      emit("change", value);
+    });
 };
 </script>
 
