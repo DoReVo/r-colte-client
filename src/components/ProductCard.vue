@@ -18,14 +18,14 @@
         class="no-tap-effect absolute top-20 right-0 mr-2 border-none outline-offset-1 duration-75 focus:outline-primary active:translate-y-0.5"
         @click="switchImage('next')"
       >
-        <NextIcon class="h-4 w-4 text-primary" />
+        <NextIcon class="h-5 w-5 text-primary" />
       </button>
       <button
         v-if="shouldRenderImgNavigationButton('prev')"
         class="no-tap-effect absolute top-20 left-0 ml-2 border-none outline-offset-1 duration-75 focus:outline-primary active:translate-y-0.5"
         @click="switchImage('prev')"
       >
-        <PrevIcon class="h-4 w-4 text-primary" />
+        <PrevIcon class="h-5 w-5 text-primary" />
       </button>
     </div>
     <h3
@@ -41,17 +41,22 @@
         :href="product.productUrl"
         rel="noopener noreferrer"
         target="_blank"
-        class="no-tap-effect flex items-center justify-center rounded-full border-none p-0.5 text-primary outline-offset-1 duration-150 visited:text-slate-400 focus:outline-primary active:translate-y-1 mouse:hover:bg-primary mouse:hover:text-white touch:active:bg-primary touch:active:text-white"
+        class="no-tap-effect flex items-center justify-center rounded border-none p-0.5 text-primary outline-offset-1 duration-150 visited:text-slate-400 focus:outline-primary active:translate-y-1 mouse:hover:bg-primary mouse:hover:text-white touch:active:bg-primary touch:active:text-white"
       >
-        <ExternalLinkIcon class="" />
+        <ExternalLinkIcon class="h-5 w-5" />
       </a>
     </div>
 
     <!-- Action bar -->
     <div
-      class="flex w-full items-center justify-start justify-start px-4 font-bree-serif text-sm text-primary"
+      class="mt-1 flex w-full items-center justify-between px-4 font-bree-serif text-sm text-primary"
     >
       {{ product.stock }} in stock
+      <button
+        class="no-tap-effect flex h-6 w-6 items-center justify-center rounded border-none p-0.5 text-primary outline-offset-1 duration-150 visited:text-slate-400 focus:outline-primary active:translate-y-1 mouse:hover:bg-primary mouse:hover:text-white touch:active:bg-primary touch:active:text-white"
+      >
+        <InfoIcon class="h-5 w-5" />
+      </button>
     </div>
   </div>
 </template>
@@ -62,6 +67,7 @@ import { ref } from "vue";
 import NextIcon from "../icons/next.vue";
 import PrevIcon from "../icons/prev.vue";
 import ExternalLinkIcon from "../icons/ExternalLink.vue";
+import InfoIcon from "../icons/InfoIcon.vue";
 
 const props = defineProps<{ product: Product }>();
 const currentSelectedImg = ref(props.product.images[0]);

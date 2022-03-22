@@ -30,6 +30,7 @@ export default ({ mode }) => {
       // Reference - https://github.com/feat-agency/vite-plugin-webfont-dl
       ViteWebfontDownload([
         "https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Bree+Serif&display=swap",
+        "https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap",
       ]),
       // Layouts like nuxt
       // Reference - https://github.com/JohnCampionJr/vite-plugin-vue-layouts

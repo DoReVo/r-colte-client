@@ -1,13 +1,6 @@
-UseElementSizeimport { ref } from "vue"; useMotion,
 <template>
-  <Dialog
-    :open="props.isOpen"
-    @close="closeModal"
-    class="fixed inset-0 h-screen"
-  >
-    <DialogOverlay
-      class="fixed inset-0 bg-black bg-opacity-20 transition duration-150"
-    />
+  <Modal :is-open="props.isOpen" @change="toggleModal">
+    <!-- Content of modal -->
     <div
       v-motion="'sidebarMotion'"
       :initial="{
@@ -17,12 +10,14 @@ UseElementSizeimport { ref } from "vue"; useMotion,
         translateX: 0,
         transition: {
           ease: [0.36, 0.66, 0.04, 1],
+          duration: 550,
         },
       }"
       :leave="{
         translateX: -300,
         transition: {
-          duration: 350,
+          ease: [0.36, 0.66, 0.04, 1],
+          duration: 550,
         },
       }"
       ref="sidebarRef"
@@ -33,10 +28,10 @@ UseElementSizeimport { ref } from "vue"; useMotion,
       >
         Recolte
       </h3>
-      <div class="grow">
+      <div class="grow space-y-6">
         <RouterLink
-          class="block h-10 w-full rounded-lg px-5 py-2 text-left font-bree-serif text-primary outline-none"
-          active-class="bg-primary bg-opacity-65 !text-white"
+          class="block h-10 w-full rounded-lg px-5 py-2 text-left font-bree-serif text-primary outline-none transition-colors mouse:hover:bg-primary/70 mouse:hover:text-white"
+          active-class="bg-primary bg-opacity-65 mouse:hover:!bg-primary !text-white"
           v-for="(route, index) in routes"
           :key="index"
           :to="route.url"
@@ -44,28 +39,34 @@ UseElementSizeimport { ref } from "vue"; useMotion,
         >
       </div>
       <button
-        class="bg-opacity-65 flex h-10 w-full items-center text-primary outline-none"
+        class="flex h-10 w-full items-center gap-x-1 rounded-lg px-5 text-primary outline-none mouse:hover:bg-primary/70 mouse:hover:text-white"
       >
-        <LogoutIcon class="inline h-10 w-10" />
+        <LogoutIcon class="inline h-7 w-7" />
         <span class="inline font-bree-serif tracking-wider">Logout</span>
       </button>
     </div>
-  </Dialog>
+  </Modal>
 </template>
 
 <script setup lang="ts">
-import { Dialog, DialogOverlay } from "@headlessui/vue";
 import { useMotions } from "@vueuse/motion";
 import { ref } from "vue";
 import { RouterLink } from "vue-router";
 import LogoutIcon from "../icons/LogoutIcon.vue";
-
-const motions = useMotions();
-const sidebarRef = ref();
+import Modal from "./Modal.vue";
 
 interface Props {
   isOpen: boolean;
 }
+
+const props = withDefaults(defineProps<Props>(), {
+  isOpen: false,
+});
+
+const emit = defineEmits<{ (event: "change", value: boolean): void }>();
+
+const motions = useMotions();
+const sidebarRef = ref();
 
 const routes = [
   { name: "Home", url: "/" },
@@ -74,16 +75,9 @@ const routes = [
   { name: "Credits", url: "/credit" },
 ];
 
-const props = withDefaults(defineProps<Props>(), {
-  isOpen: false,
-});
-
-const emit = defineEmits<{ (event: "updateIsOpen", value: boolean): void }>();
-
-const closeModal = async () => {
+const toggleModal = async (state: boolean) => {
   motions.sidebarMotion.leave(() => {
-    console.log("Closed");
-    emit("updateIsOpen", false);
+    emit("change", state);
   });
 };
 </script>

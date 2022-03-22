@@ -3,19 +3,18 @@
     class="header relative mb-5 flex h-[50px] items-center justify-center bg-primary-darker px-5 drop-shadow-lg"
   >
     <button
-      class="no-tap-effect flex h-10 w-10 items-center justify-center text-white outline-none"
+      class="no-tap-effect flex h-max w-max items-center justify-center p-1 text-white outline-none"
       @click="toggleSidebar(true)"
     >
-      <MenuIcon class="h-10 w-10" />
+      <MenuIcon class="h-6 w-6" />
     </button>
-    <div class="grow text-2xl font-bold text-white">
+    <div
+      class="grow font-bebas-neue text-2xl font-bold tracking-widest text-white"
+    >
       {{ APP_NAME }}
     </div>
   </div>
-  <Sidebar
-    :is-open="isOpenSidebar"
-    @updateIsOpen="toggleSidebar(false)"
-  ></Sidebar>
+  <Sidebar :is-open="isOpenSidebar" @change="toggleSidebar"></Sidebar>
 </template>
 
 <script setup lang="ts">
@@ -28,7 +27,7 @@ const isOpenSidebar = ref(false);
 
 const { APP_NAME } = AppStore();
 
-function toggleSidebar(value = true) {
+function toggleSidebar(value: boolean) {
   isOpenSidebar.value = value;
 }
 </script>

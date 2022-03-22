@@ -7,6 +7,7 @@ module.exports = {
       fontFamily: {
         "bebas-neue": ["Bebas Neue", "cursive"],
         "bree-serif": ["Bree Serif", "serif"],
+        merriweather: ["Merriweather", "serif"],
       },
       colors: {
         primary: {
@@ -21,5 +22,5 @@ module.exports = {
       },
     },
   },
-  plugins: [require("@tailwindcss/line-clamp")],
+  plugins: [require("@tailwindcss/line-clamp"), require("@tailwindcss/forms")],
 };
