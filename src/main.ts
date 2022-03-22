@@ -6,7 +6,6 @@ import App from "./App.vue";
 import { setupLayouts } from "virtual:generated-layouts";
 // eslint-disable-next-line import/no-unresolved
 import VirtualPages from "~pages";
-import PrimeVue from "primevue/config";
 import { MotionPlugin } from "@vueuse/motion";
 
 // Tailwind stuff inside here
@@ -23,13 +22,5 @@ const app = createApp(App);
 app.use(router);
 app.use(createPinia());
 app.use(MotionPlugin);
-
-// Prime vue css and theme
-// Change the first import to change theme
-import "primevue/resources/themes/saga-blue/theme.css";
-import "primevue/resources/primevue.min.css";
-import "primeicons/primeicons.css";
-
-app.use(PrimeVue);
 
 app.mount("#app");
