@@ -22,7 +22,7 @@
       }"
       class="fixed bottom-0 z-10 h-[95%] w-full rounded-t-xl bg-white drop-shadow-xl"
     >
-      <slot> </slot>
+      <slot :toggleDialog="toggleDialog"> </slot>
     </div>
   </Dialog>
 </template>

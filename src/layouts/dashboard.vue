@@ -12,8 +12,12 @@
       <PlusIcon class="h-8 w-8 rounded-full border-none" />
     </button>
   </div>
-  <ActionSheet :is-open="isOpenActionSheet" @change="toggleSheet">
-    <EntryForm @close="toggleSheet(false)" />
+  <ActionSheet
+    :is-open="isOpenActionSheet"
+    @change="toggleSheet"
+    v-slot="{ toggleDialog }"
+  >
+    <EntryForm :toggleDialog="toggleDialog" @submit="submitForm" />
   </ActionSheet>
 </template>
 
@@ -23,18 +27,16 @@ import ActionSheet from "@/components/ActionSheet.vue";
 import PlusIcon from "@/icons/PlusIcon.vue";
 import EntryForm from "@/components/EntryForm.vue";
 import { ref } from "vue";
+import type { FormData } from "@/types/Form";
 
 const isOpenActionSheet = ref(false);
 
 const toggleSheet = (value: boolean) => {
-  console.log(
-    "Captured sheet toggle event from",
-    isOpenActionSheet.value,
-    "to",
-    value
-  );
-
   isOpenActionSheet.value = value;
+};
+
+const submitForm = (data: FormData) => {
+  console.log(data.shopId, data.productMatch, data.searchQuery);
 };
 </script>
 
