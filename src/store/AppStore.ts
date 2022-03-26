@@ -1,10 +1,13 @@
+import type { ShopEntry } from "@/types/ShopEntry";
 import type { Product } from "@/types/Product";
 import { defineStore } from "pinia";
+import { nanoid } from "nanoid";
 
 interface AppState {
   APP_NAME: string;
   user: User;
   products: Product[];
+  shopEntry: ShopEntry[];
 }
 
 interface User {
@@ -535,6 +538,78 @@ const AppStore = defineStore("App", {
         images: [
           "https://cf.shopee.com.my/file/5710fae17b9062da14e4022936f7b07c",
         ],
+      },
+    ],
+    shopEntry: [
+      {
+        id: nanoid(),
+        shopId: "122020924",
+        shopName: "Egg comp technology",
+        searchQuery: "graphics card",
+        productMatch: ["5600", "5700", "6600", "6700"],
+      },
+      {
+        id: nanoid(),
+        shopId: "59277182",
+        shopName: "Dotatech",
+        searchQuery: "graphics card",
+        productMatch: ["5600", "5700", "6600", "6700"],
+      },
+      {
+        id: nanoid(),
+        shopId: "250860104",
+        shopName: "YX Comp Signature",
+        searchQuery: "graphics card",
+        productMatch: ["5600", "5700", "6600", "6700"],
+      },
+      {
+        id: nanoid(),
+        shopId: "99616108",
+        shopName: "ETECHPC",
+        searchQuery: "graphics card",
+        productMatch: ["5600", "5700", "6600", "6700"],
+      },
+      {
+        id: nanoid(),
+        shopId: "28954261",
+        shopName: "BANANA IT STORE",
+        searchQuery: "graphics card",
+        productMatch: ["5600", "5700", "6600", "6700"],
+      },
+      {
+        id: nanoid(),
+        shopId: "18799831",
+        shopName: "Ebucket",
+        searchQuery: "graphics card",
+        productMatch: ["5600", "5700", "6600", "6700"],
+      },
+      {
+        id: nanoid(),
+        shopId: "65736936",
+        shopName: "PCByte Malaysia",
+        searchQuery: "graphics card",
+        productMatch: ["5600", "5700", "6600", "6700"],
+      },
+      {
+        id: nanoid(),
+        shopId: "43829688",
+        shopName: "EIT Store",
+        searchQuery: "graphics card",
+        productMatch: ["5600", "5700", "6600", "6700"],
+      },
+      {
+        id: nanoid(),
+        shopId: "105136036",
+        shopName: "YESIT",
+        searchQuery: "graphics card",
+        productMatch: ["5600", "5700", "6600", "6700"],
+      },
+      {
+        id: nanoid(),
+        shopId: "69987196",
+        shopName: "BUCKBOOST IT STORE",
+        searchQuery: "graphics card",
+        productMatch: ["5600", "5700", "6600", "6700"],
       },
     ],
   }),

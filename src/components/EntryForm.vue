@@ -23,6 +23,14 @@
       class="input-base input-normal"
       v-model="formData.shopId"
     />
+    <label for="shopName">Shop Name</label>
+    <input
+      id="shopName"
+      type="text"
+      autocomplete="off"
+      class="input-base input-normal"
+      v-model="formData.shopName"
+    />
     <label for="search">Search Query</label>
     <input
       id="search"
@@ -35,6 +43,7 @@
     <div class="input-base input-tag-wrapper flex-wrap">
       <template v-for="(match, index) in formData.productMatch" :key="match">
         <span
+          v-motion-fade
           class="cursor-pointer rounded-lg bg-primary p-1 text-sm text-white"
           @click="removeMatch(index)"
           >{{ match }}</span
@@ -55,14 +64,15 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import type { FormData } from "@/types/Form";
+import type { ShopEntry } from "@/types/ShopEntry";
 
 const tagInput = ref("");
 
-const formData = ref<FormData>({
+const formData = ref<ShopEntry>({
   shopId: "",
   searchQuery: "",
   productMatch: [],
+  shopName: "",
 });
 
 interface Props {
@@ -70,7 +80,7 @@ interface Props {
 }
 
 interface Emits {
-  (event: "submit", formData: FormData): void;
+  (event: "submit", formData: ShopEntry): void;
 }
 
 const emit = defineEmits<Emits>();
@@ -90,6 +100,7 @@ const addMatch = () => {
 
 const submit = () => {
   emit("submit", formData.value);
+  props.toggleDialog(false);
 };
 </script>
 
@@ -111,6 +122,6 @@ label {
 }
 
 .input-tag-wrapper {
-  @apply flex gap-x-1 gap-y-1 border px-3 py-2 outline-1 ring-1 focus-within:border-primary focus-within:outline-primary focus-within:ring-primary;
+  @apply flex gap-x-1 gap-y-1 border px-3 py-2 focus-within:border-primary focus-within:outline-1 focus-within:outline-primary focus-within:ring-1 focus-within:ring-primary;
 }
 </style>

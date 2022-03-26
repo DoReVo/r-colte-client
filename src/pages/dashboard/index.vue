@@ -1,32 +1,55 @@
 <template>
   <div
-    class="mt-5 grid grid-cols-1 items-center justify-items-center gap-y-14 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+    class="mt-5 grid grid-cols-1 items-center justify-items-center gap-y-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
   >
-    <ProductCard
-      v-for="(product, index) in products"
-      :product="product"
+    <StoreCard
+      v-for="(shop, index) in appStore.shopEntry"
+      :shop="shop"
       :key="index"
     />
+    <div
+      class="actionbar fixed right-0 bottom-0 flex h-14 w-full items-center justify-around rounded-t-xl border-none bg-primary-darker drop-shadow"
+    >
+      <button
+        class="h-max w-max rounded-full border-none text-white outline-none"
+        @click="toggleSheet(true)"
+        :disabled="isOpenActionSheet"
+      >
+        <PlusIcon class="h-8 w-8 rounded-full border-none" />
+      </button>
+    </div>
+    <ActionSheet
+      :is-open="isOpenActionSheet"
+      @change="toggleSheet"
+      v-slot="{ toggleDialog }"
+    >
+      <EntryForm :toggleDialog="toggleDialog" @submit="submitForm" />
+    </ActionSheet>
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import AppStore from "@/store/AppStore";
-import { mapState } from "pinia";
-import { defineComponent } from "vue";
-import ProductCard from "../../components/ProductCard.vue";
+import ActionSheet from "@/components/ActionSheet.vue";
+import PlusIcon from "@/icons/PlusIcon.vue";
+import EntryForm from "@/components/EntryForm.vue";
+import { ref } from "vue";
+import type { ShopEntry } from "@/types/ShopEntry";
+import StoreCard from "../../components/StoreCard.vue";
+import { nanoid } from "nanoid";
 
-export default defineComponent({
-  name: "DashboardIndexPage",
-  setup() {
-    return {};
-  },
-  computed: {
-    ...mapState(AppStore, ["products"]),
-  },
-  methods: {},
-  components: { ProductCard },
-});
+const appStore = AppStore();
+
+const isOpenActionSheet = ref(false);
+
+const toggleSheet = (value: boolean) => {
+  isOpenActionSheet.value = value;
+};
+
+const submitForm = (data: ShopEntry) => {
+  data.id = nanoid();
+  appStore.shopEntry.push(data);
+};
 </script>
 
 <style scoped></style>

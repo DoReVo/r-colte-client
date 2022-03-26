@@ -1,4 +1,3 @@
-, useMotionProperties, useMotionControls
 <template>
   <div class="h-[275px] w-[250px] rounded-lg bg-white shadow-sm">
     <div class="relative w-full">
