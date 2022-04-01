@@ -1,55 +1,3 @@
-<script lang="ts">
-import AppStore from "@/store/AppStore";
-import sleep from "@/utils/sleep";
-import { mapState } from "pinia";
-import { defineComponent } from "vue";
-import GoogleIcon from "../icons/google.vue";
-import Spinner from "../components/Spinner.vue";
-
-export default defineComponent({
-  name: "SignInPage",
-  data() {
-    return {
-      isLoading: false,
-    };
-  },
-  computed: {
-    ...mapState(AppStore, ["user", "APP_NAME"]),
-  },
-  methods: {
-    async signIn() {
-      this.isLoading = true;
-      await sleep(1000);
-      this.$router.push("/dashboard");
-      // Get challenge and state
-      /* const res = await fetch(
-              `${import.meta.env.VITE_API_URL}/oauth/credential`
-            );
-      
-            const { state, challenge } = await res.json();
-      
-            const options = {
-              response_type: "code",
-              client_id: import.meta.env.VITE_TWITTER_CLIENT_ID,
-              redirect_uri: `${import.meta.env.VITE_APP_HOST}/oauth/twitter/callback`,
-              state,
-              code_challenge: challenge,
-              code_challenge_method: "plain",
-              scope: "users.read tweet.read",
-            };
-      
-            const url = new URL("https://twitter.com/i/oauth2/authorize");
-            url.search = new URLSearchParams(options).toString();
-            window.location.replace(url.toString()); */
-    },
-    goHome() {
-      this.$router.push("/");
-    },
-  },
-  components: { GoogleIcon, Spinner },
-});
-</script>
-
 <template>
   <div
     class="container mx-auto flex max-h-full min-h-screen w-full items-center justify-center pt-32"
@@ -60,10 +8,10 @@ export default defineComponent({
       <h1 class="text-center font-serif font-bold tracking-wide">
         Sign in to
         <span
-          class="tracking-normal text-primary underline underline-offset-1 transition-colors hover:cursor-pointer"
+          class="font-bree-serif tracking-normal text-primary underline underline-offset-1 transition-colors hover:cursor-pointer"
           @click.prevent.stop="goHome"
         >
-          {{ APP_NAME }}
+          {{ appStore.APP_NAME }}
         </span>
       </h1>
 
@@ -85,3 +33,48 @@ export default defineComponent({
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+import AppStore from "@/store/AppStore";
+import { ref } from "vue";
+import GoogleIcon from "../icons/google.vue";
+import Spinner from "../components/Spinner.vue";
+import { useRouter } from "vue-router";
+import useAxios from "@/compositions/useAxios";
+
+const appStore = AppStore();
+const router = useRouter();
+const isLoading = ref(false);
+const axios = useAxios();
+
+function goHome() {
+  router.push("/");
+}
+
+async function signIn() {
+  // isLoading.value = true;
+
+  // Get challenge and state
+  const res = await axios.get(`/oauth/credential`);
+
+  const { state, challenge } = res.data;
+
+  const options = {
+    prompt: "select_account",
+    flowName: "GeneralOAuthFlow",
+    client_id: import.meta.env.VITE_APP_GOOGLE_CLIENT_ID,
+    redirect_uri: `${
+      import.meta.env.VITE_APP_CLIENT_URL
+    }/oauth/google/callback`,
+    response_type: "code",
+    state,
+    code_challenge: challenge,
+    code_challenge_method: "plain",
+    scope: "openid email profile",
+  };
+
+  const url = new URL("https://accounts.google.com/o/oauth2/v2/auth");
+  url.search = new URLSearchParams(options).toString();
+  window.location.replace(url.toString());
+}
+</script>
