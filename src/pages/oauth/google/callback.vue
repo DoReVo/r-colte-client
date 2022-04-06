@@ -20,21 +20,41 @@
 </template>
 
 <script setup lang="ts">
-import useAxios from "@/compositions/useAxios";
+import useKy from "@/compositions/useKy";
 import AppStore from "@/store/AppStore";
+import type { User } from "@/types/User";
+import { useStorage } from "@vueuse/core";
 import { ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
+
+interface CallbackResponse {
+  token: string;
+  user: User.User;
+}
 
 const route = useRoute();
 const router = useRouter();
 let qs = ref(route.query);
 
 const appStore = AppStore();
-const axios = useAxios();
+const ky = useKy();
 
 async function auth() {
-  const res = await axios.post("/oauth/google/callback", qs.value);
-  console.log(res.data);
+  const res = await ky
+    .post("oauth/google/callback", {
+      json: qs.value,
+    })
+    .json<CallbackResponse>();
+
+  // set token
+  appStore.apiKey = res.token;
+  appStore.user = res.user;
+
+  // Set in local storage
+  const apiKey = useStorage("apiKey", "");
+  apiKey.value = res.token;
+
+  router.replace("/dashboard");
 }
 
 function goHome() {

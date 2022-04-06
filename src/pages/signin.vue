@@ -40,24 +40,29 @@ import { ref } from "vue";
 import GoogleIcon from "../icons/google.vue";
 import Spinner from "../components/Spinner.vue";
 import { useRouter } from "vue-router";
-import useAxios from "@/compositions/useAxios";
+import useKy from "@/compositions/useKy";
 
 const appStore = AppStore();
 const router = useRouter();
 const isLoading = ref(false);
-const axios = useAxios();
+const ky = useKy();
 
 function goHome() {
   router.push("/");
+}
+
+interface ChallengeResponse {
+  state: string;
+  challenge: string;
 }
 
 async function signIn() {
   // isLoading.value = true;
 
   // Get challenge and state
-  const res = await axios.get(`/oauth/credential`);
+  const res = await ky.get(`oauth/credential`).json<ChallengeResponse>();
 
-  const { state, challenge } = res.data;
+  const { state, challenge } = res;
 
   const options = {
     prompt: "select_account",

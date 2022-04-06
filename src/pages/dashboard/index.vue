@@ -36,19 +36,25 @@ import EntryForm from "@/components/EntryForm.vue";
 import { ref } from "vue";
 import type { ShopEntry } from "@/types/ShopEntry";
 import StoreCard from "../../components/StoreCard.vue";
-import { nanoid } from "nanoid";
+import useKy from "@/compositions/useKy";
 
 const appStore = AppStore();
 
 const isOpenActionSheet = ref(false);
+const ky = useKy();
 
 const toggleSheet = (value: boolean) => {
   isOpenActionSheet.value = value;
 };
 
-const submitForm = (data: ShopEntry) => {
-  data.id = nanoid();
-  appStore.shopEntry.push(data);
+const submitForm = async (data: ShopEntry) => {
+  const res = await ky
+    .post("shopentry", {
+      json: data,
+    })
+    .json<ShopEntry>();
+
+  appStore.shopEntry.push(res);
 };
 </script>
 
@@ -57,4 +63,5 @@ const submitForm = (data: ShopEntry) => {
 <route lang="yaml">
 meta:
   layout: dashboard
+  requireAuth: true
 </route>

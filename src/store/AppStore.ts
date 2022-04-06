@@ -1,24 +1,23 @@
 import type { ShopEntry } from "@/types/ShopEntry";
 import type { Product } from "@/types/Product";
 import { defineStore } from "pinia";
-import { nanoid } from "nanoid";
+import type { User } from "@/types/User";
 
 interface AppState {
   APP_NAME: string;
-  user: User;
+  user: User.User;
   products: Product[];
   shopEntry: ShopEntry[];
-}
-
-interface User {
-  email: string;
-  name: string;
+  apiKey: string;
+  isLoggedIn: boolean;
 }
 
 const AppStore = defineStore("App", {
   state: (): AppState => ({
     APP_NAME: "Recolte",
-    user: { email: "myemail@email.com", name: "DoReVo" },
+    user: {} as User.User,
+    apiKey: "",
+    isLoggedIn: false,
     products: [
       {
         name: "GAINWARD RTX3080 PHOENIX 12GB GDDR6X RTX 3080 PHOENIX",
@@ -540,78 +539,79 @@ const AppStore = defineStore("App", {
         ],
       },
     ],
-    shopEntry: [
-      {
-        id: nanoid(),
-        shopId: "122020924",
-        shopName: "Egg comp technology",
-        searchQuery: "graphics card",
-        productMatch: ["5600", "5700", "6600", "6700"],
-      },
-      {
-        id: nanoid(),
-        shopId: "59277182",
-        shopName: "Dotatech",
-        searchQuery: "graphics card",
-        productMatch: ["5600", "5700", "6600", "6700"],
-      },
-      {
-        id: nanoid(),
-        shopId: "250860104",
-        shopName: "YX Comp Signature",
-        searchQuery: "graphics card",
-        productMatch: ["5600", "5700", "6600", "6700"],
-      },
-      {
-        id: nanoid(),
-        shopId: "99616108",
-        shopName: "ETECHPC",
-        searchQuery: "graphics card",
-        productMatch: ["5600", "5700", "6600", "6700"],
-      },
-      {
-        id: nanoid(),
-        shopId: "28954261",
-        shopName: "BANANA IT STORE",
-        searchQuery: "graphics card",
-        productMatch: ["5600", "5700", "6600", "6700"],
-      },
-      {
-        id: nanoid(),
-        shopId: "18799831",
-        shopName: "Ebucket",
-        searchQuery: "graphics card",
-        productMatch: ["5600", "5700", "6600", "6700"],
-      },
-      {
-        id: nanoid(),
-        shopId: "65736936",
-        shopName: "PCByte Malaysia",
-        searchQuery: "graphics card",
-        productMatch: ["5600", "5700", "6600", "6700"],
-      },
-      {
-        id: nanoid(),
-        shopId: "43829688",
-        shopName: "EIT Store",
-        searchQuery: "graphics card",
-        productMatch: ["5600", "5700", "6600", "6700"],
-      },
-      {
-        id: nanoid(),
-        shopId: "105136036",
-        shopName: "YESIT",
-        searchQuery: "graphics card",
-        productMatch: ["5600", "5700", "6600", "6700"],
-      },
-      {
-        id: nanoid(),
-        shopId: "69987196",
-        shopName: "BUCKBOOST IT STORE",
-        searchQuery: "graphics card",
-        productMatch: ["5600", "5700", "6600", "6700"],
-      },
-    ],
+    shopEntry: [],
+    // shopEntry: [
+    //   {
+    //     id: nanoid(),
+    //     shopId: "122020924",
+    //     shopName: "Egg comp technology",
+    //     searchQuery: "graphics card",
+    //     productMatch: ["5600", "5700", "6600", "6700"],
+    //   },
+    //   {
+    //     id: nanoid(),
+    //     shopId: "59277182",
+    //     shopName: "Dotatech",
+    //     searchQuery: "graphics card",
+    //     productMatch: ["5600", "5700", "6600", "6700"],
+    //   },
+    //   {
+    //     id: nanoid(),
+    //     shopId: "250860104",
+    //     shopName: "YX Comp Signature",
+    //     searchQuery: "graphics card",
+    //     productMatch: ["5600", "5700", "6600", "6700"],
+    //   },
+    //   {
+    //     id: nanoid(),
+    //     shopId: "99616108",
+    //     shopName: "ETECHPC",
+    //     searchQuery: "graphics card",
+    //     productMatch: ["5600", "5700", "6600", "6700"],
+    //   },
+    //   {
+    //     id: nanoid(),
+    //     shopId: "28954261",
+    //     shopName: "BANANA IT STORE",
+    //     searchQuery: "graphics card",
+    //     productMatch: ["5600", "5700", "6600", "6700"],
+    //   },
+    //   {
+    //     id: nanoid(),
+    //     shopId: "18799831",
+    //     shopName: "Ebucket",
+    //     searchQuery: "graphics card",
+    //     productMatch: ["5600", "5700", "6600", "6700"],
+    //   },
+    //   {
+    //     id: nanoid(),
+    //     shopId: "65736936",
+    //     shopName: "PCByte Malaysia",
+    //     searchQuery: "graphics card",
+    //     productMatch: ["5600", "5700", "6600", "6700"],
+    //   },
+    //   {
+    //     id: nanoid(),
+    //     shopId: "43829688",
+    //     shopName: "EIT Store",
+    //     searchQuery: "graphics card",
+    //     productMatch: ["5600", "5700", "6600", "6700"],
+    //   },
+    //   {
+    //     id: nanoid(),
+    //     shopId: "105136036",
+    //     shopName: "YESIT",
+    //     searchQuery: "graphics card",
+    //     productMatch: ["5600", "5700", "6600", "6700"],
+    //   },
+    //   {
+    //     id: nanoid(),
+    //     shopId: "69987196",
+    //     shopName: "BUCKBOOST IT STORE",
+    //     searchQuery: "graphics card",
+    //     productMatch: ["5600", "5700", "6600", "6700"],
+    //   },
+    // ],
   }),
 });
 
