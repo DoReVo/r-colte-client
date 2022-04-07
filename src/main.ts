@@ -7,10 +7,11 @@ import { setupLayouts } from "virtual:generated-layouts";
 // eslint-disable-next-line import/no-unresolved
 import VirtualPages from "~pages";
 import { MotionPlugin } from "@vueuse/motion";
-
 // Tailwind stuff inside here
 import "./main.css";
 import AppStore from "./store/AppStore";
+import logger from "@/utils/logger";
+
 const RoutesWithLayouts = setupLayouts(VirtualPages);
 
 const router = createRouter({
@@ -26,17 +27,27 @@ app.use(MotionPlugin);
 
 // Make sure route that required auth are
 // accessible by user
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 router.beforeEach((to, from) => {
-  // If route does not require auth
-  if (!to.meta.requireAuth) return true;
+  if (to.meta.requireAuth) {
+    logger.info("Route require auth", { route: to.path });
 
-  const appStore = AppStore();
-  console.log("Navigation guard", appStore.isLoggedIn);
+    const appStore = AppStore();
+    if (appStore.apiKey) {
+      logger.info("API key is present, allowing access to route", {
+        to: to.path,
+        from: from.path,
+      });
 
-  // If route require auth and user is not logged in
-  if (to.meta.requireAuth && !appStore.isLoggedIn) return { name: "signin" };
+      return true;
+    }
+
+    logger.warn("API key not present, denying access to route", {
+      to: to.path,
+      from: from.path,
+    });
+
+    return { name: "signin" };
+  }
 
   return true;
 });

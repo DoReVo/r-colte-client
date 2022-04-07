@@ -1,5 +1,5 @@
 <template>
-  <Header class="mb-3" />
+  <Header />
   <router-view />
 </template>
 

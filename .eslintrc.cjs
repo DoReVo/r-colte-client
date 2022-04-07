@@ -19,6 +19,7 @@ module.exports = {
         peerDependencies: false,
       },
     ],
+    "no-console": "warn",
   },
   settings: {
     "import/parsers": {
